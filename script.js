@@ -1,8 +1,9 @@
+const API_URL = "https://backend-6zpj.onrender.com"; // CHANGE THIS TO YOUR RENDER URL (e.g., "https://your-backend.onrender.com") WHEN DEPLOYED
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
 async function displayProducts() {
     try {
-        const res = await fetch("http://localhost:5000/api/products");
+        const res = await fetch(`${API_URL}/api/products`);
         const products = await res.json();
 
         const container = document.getElementById("products");
@@ -24,7 +25,7 @@ async function displayProducts() {
 }
 
 function addToCart(id) {
-    fetch("http://localhost:5000/api/products")
+    fetch(`${API_URL}/api/products`)
         .then(res => res.json())
         .then(products => {
             const item = products.find(p => p._id === id);
@@ -66,7 +67,7 @@ async function register() {
     }
 
     try {
-        const res = await fetch("http://localhost:5000/api/auth/register", {
+        const res = await fetch(`${API_URL}/api/auth/register`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -98,7 +99,7 @@ async function login() {
     }
 
     try {
-        const res = await fetch("http://localhost:5000/api/auth/login", {
+        const res = await fetch(`${API_URL}/api/auth/login`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -128,7 +129,7 @@ async function checkout() {
         return;
     }
 
-    await fetch("http://localhost:5000/api/orders", {
+    await fetch(`${API_URL}/api/orders`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
