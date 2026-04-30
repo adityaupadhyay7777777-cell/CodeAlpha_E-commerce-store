@@ -1,4 +1,5 @@
-const API_URL = "https://backend-6zpj.onrender.com"; // CHANGE THIS TO YOUR RENDER URL (e.g., "https://your-backend.onrender.com") WHEN DEPLOYED
+const API_URL = "https://backend-1-3kaz.onrender.com"; // Use localhost for local development
+// const API_URL = "https://backend-6zpj.onrender.com"; // Use this when deployed
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 const nameInput = document.getElementById("name");
 
@@ -164,20 +165,17 @@ async function login() {
     }
 }
 const loginbtn = document.getElementById("loginbtn");
-const loginpage=document.getElementById("login");
-loginpage.style.display="none";
-loginbtn.addEventListener("click", () => {
-    loginpage.style.display=loginpage.style.display==="none" || loginpage.style.display==="" ? "none" : "block";
-    
-});
-document.addEventListener("click", (e) => {
-    e.stopPropagation();
-    loginpage.style.display = "none";
-});
+const loginpage = document.getElementById("login");
+
 loginbtn.addEventListener("click", (e) => {
     e.stopPropagation();
     loginpage.style.display = loginpage.style.display === "block" ? "none" : "block";
 });
+
+document.addEventListener("click", () => {
+    loginpage.style.display = "none";
+});
+
 loginpage.addEventListener("click", (e) => {
     e.stopPropagation();
 });
