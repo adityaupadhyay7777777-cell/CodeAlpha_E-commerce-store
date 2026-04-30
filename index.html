@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,23 +8,30 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
+
 <body>
     <header>
         <h1>My Shop</h1>
-        <div class="cart-icon" onclick="toggleCart()">
-            🛒 <span id="cart-count">0</span>
+        <div class="navbar">
+            <div>
+                <button id="loginbtn">Login</button>
+                <div class="auth-section" id="login" style="display: none;">
+                    <h2>Login / Register</h2>
+                    <input id="name" type="text" placeholder="Name (for Register)">
+                    <input id="email" type="email" placeholder="Email">
+                    <input id="password" type="password" placeholder="Password">
+                    <button onclick="login()">Login</button>
+                    <button onclick="register()">Register</button>
+                </div>
+
+            </div>
+
+            <div class="cart-icon" id="cart-icon" onclick="toggleCart()">
+                🛒 <span id="cart-count">0</span>
+            </div>
         </div>
     </header>
 
-    <!-- Login Section -->
-    <section class="auth-section">
-        <h2>Login / Register</h2>
-        <input id="name" type="text" placeholder="Name (for Register)">
-        <input id="email" type="email" placeholder="Email">
-        <input id="password" type="password" placeholder="Password">
-        <button onclick="login()">Login</button>
-        <button onclick="register()">Register</button>
-    </section>
 
     <!-- Product Listing -->
     <section id="products" class="product-list">
@@ -37,3 +45,5 @@
         <p>Total: ₹<span id="total">0</span></p>
         <button onclick="checkout()">Checkout</button>
     </div>
+
+</body>

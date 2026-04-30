@@ -12,6 +12,24 @@ header {
     background: #333;
     color: white;
 }
+.navbar {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar button {
+    cursor: pointer;
+    font-size: 15px;
+    padding: 4px 8px;
+    align-self: center;
+    justify-self: center;
+    background-color: rgb(117, 165, 193);
+    border-radius: 5px;
+    color: rgb(245, 240, 240);
+    position: relative;
+}
 
 .cart-icon {
     cursor: pointer;
@@ -19,6 +37,10 @@ header {
 }
 
 .auth-section {
+    position: absolute;
+    top: 60px;
+    right:0px;
+
     padding: 20px;
     background: white;
     max-width: 400px;
@@ -106,6 +128,6 @@ button {
     box-shadow: -2px 0 5px rgba(0,0,0,0.3);
 }
 
-.cart.hidden {
+#cart.hidden {
     display: none;
 }

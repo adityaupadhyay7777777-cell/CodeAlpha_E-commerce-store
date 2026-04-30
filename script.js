@@ -1,5 +1,7 @@
 const API_URL = "https://backend-6zpj.onrender.com"; // CHANGE THIS TO YOUR RENDER URL (e.g., "https://your-backend.onrender.com") WHEN DEPLOYED
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
+const nameInput = document.getElementById("name");
+
 
 async function displayProducts() {
     try {
@@ -55,7 +57,46 @@ function updateCart() {
 function toggleCart() {
     document.getElementById("cart").classList.toggle("hidden");
 }
+document.getElementById("cart").addEventListener("click", e => e.stopPropagation());
+document.getElementById("cart-icon").addEventListener("click", e => {
+    
+    e.stopPropagation();
+    toggleCart();
+    document.getElementById("cart").classList.toggle("hidden");
+    
+});
+document.addEventListener("click", () => {
+    document.getElementById("cart").classList.add("hidden");
+});
+async function checkout() {
+    const token = localStorage.getItem("token");
+    if (!token) {
+        alert("Please login first!");
+        return;
+    }
 
+    await fetch(`${API_URL}/api/orders`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + token
+        },
+        body: JSON.stringify({
+            userId: "123", // In a real app, you'd use the logged-in user ID
+            products: cart,
+            total: cart.reduce((sum, p) => sum + p.price, 0)
+        })
+    });
+
+    alert("Order placed!");
+    cart = [];
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCart();
+}
+
+// Call the function to load products on page load
+displayProducts();
+updateCart();
 async function register() {
     const nameVal = document.getElementById('name').value;
     const emailVal = document.getElementById('email').value;
@@ -116,38 +157,27 @@ async function login() {
         } else {
             alert("Login failed: " + (data.message || data || "Invalid credentials"));
         }
+        
     } catch (err) {
         console.error(err);
         alert("Server error during login");
     }
 }
-
-async function checkout() {
-    const token = localStorage.getItem("token");
-    if (!token) {
-        alert("Please login first!");
-        return;
-    }
-
-    await fetch(`${API_URL}/api/orders`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": "Bearer " + token
-        },
-        body: JSON.stringify({
-            userId: "123", // In a real app, you'd use the logged-in user ID
-            products: cart,
-            total: cart.reduce((sum, p) => sum + p.price, 0)
-        })
-    });
-
-    alert("Order placed!");
-    cart = [];
-    localStorage.setItem('cart', JSON.stringify(cart));
-    updateCart();
-}
-
-// Call the function to load products on page load
-displayProducts();
-updateCart();
+const loginbtn = document.getElementById("loginbtn");
+const loginpage=document.getElementById("login");
+loginpage.style.display="none";
+loginbtn.addEventListener("click", () => {
+    loginpage.style.display=loginpage.style.display==="none" || loginpage.style.display==="" ? "none" : "block";
+    
+});
+document.addEventListener("click", (e) => {
+    e.stopPropagation();
+    loginpage.style.display = "none";
+});
+loginbtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    loginpage.style.display = loginpage.style.display === "block" ? "none" : "block";
+});
+loginpage.addEventListener("click", (e) => {
+    e.stopPropagation();
+});
