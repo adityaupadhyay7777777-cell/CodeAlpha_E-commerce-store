@@ -242,7 +242,7 @@ function updateCart() {
         let total = 0;
         cart.forEach(item => {
             total += item.price;
-            cartItemsList.innerHTML += `<li><span>${item.image ? `<img src="${item.image}" alt="${item.name}">` : ''}</span><span>${item.name}</span><span id="item-price">₹${item.price}</span><button onclick="removeFromCart('${item._id}')">--</button></li>`;
+            cartItemsList.innerHTML += `<li><span>${item.image ? `<img src="${item.image}" alt="${item.name}">` : ''}</span><span>${item.name}</span><span id="item-price">₹${item.price}</span><button onclick="removeFromCart('${item._id}')">-</button></li>`;
         });
 
         if (totalSpan) totalSpan.innerText = total;

@@ -12,6 +12,7 @@ header {
     background: #333;
     color: white;
 }
+
 .navbar {
     display: flex;
     gap: 5px;
@@ -22,6 +23,7 @@ header {
 #logoutbtn {
     display: none;
 }
+
 .navbar button {
     cursor: pointer;
     font-size: 15px;
@@ -46,28 +48,40 @@ header {
 
     padding: 20px;
     background: white;
-    width: 80vb;
-    height: 70vh;
+    width: 90%;
+    max-width: 400px;
+    /* height: 70vh; Removed to prevent overflow issues on mobile */
     margin: 20px auto;
     text-align: center;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-.auth-section h2{
+
+.auth-section h2 {
     padding: 20px;
-    font-size:x-large;
-    border:#333 solid 1px;
+    font-size: x-large;
+    border: #333 solid 1px;
     background-color: rgb(235, 188, 188);
     animation-name: loginanimate;
     animation-duration: 3s;
     animation-iteration-count: infinite;
     animation-timing-function: ease-in-out;
 }
+
 @keyframes loginanimate {
-    0% { background-color: rgb(235, 188, 188); }
-    50% { background-color: rgb(232, 134, 134); }
-    100% { background-color: rgb(237, 172, 172); }
+    0% {
+        background-color: rgb(235, 188, 188);
+    }
+
+    50% {
+        background-color: rgb(232, 134, 134);
+    }
+
+    100% {
+        background-color: rgb(237, 172, 172);
+    }
 }
+
 .auth-section input {
     display: block;
     width: 90%;
@@ -75,6 +89,7 @@ header {
     margin: 10px auto;
     border: 1px solid #ccc;
     border-radius: 5px;
+    box-sizing: border-box;
 }
 
 .auth-section button {
@@ -95,6 +110,7 @@ header {
     gap: 20px;
     padding: 20px;
 }
+
 #products {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -109,6 +125,7 @@ header {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
+
 .product {
     background: white;
     padding: 15px;
@@ -146,19 +163,18 @@ button {
 #cart {
     display: flex;
     flex-direction: column;
-    align-items:flex-start;
+    align-items: flex-start;
     /* justify-content: flex-start; */
     background: white;
     padding: 20px;
     overflow-y: auto;
-    box-shadow: -2px 0 5px rgba(0,0,0,0.3);
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
 }
 
 
-#cart ul li
-{
+#cart ul li {
     display: flex;
-    align-items:flex-start;
+    align-items: flex-start;
     justify-content: flex-start;
     gap: 100px;
     /* margin-bottom: 10px; */
@@ -166,20 +182,25 @@ button {
     border: #dedcdc solid 0.5px;
     margin-left: 0px;
 }
-#cart ul li img{
+
+#cart ul li img {
     width: 60px;
     height: 60px;
     object-fit: cover;
 }
-#cart ul{
+
+#cart ul {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
+    translate: -30px 0px;
 }
-#cart ul li span{
+
+#cart ul li span {
     width: 100px;
 }
+
 #checkout-section {
     margin-top: 20px;
     padding: 20px;
@@ -187,25 +208,46 @@ button {
     border-radius: 10px;
     width: 100%;
 }
-#cart h2{
+
+#cart h2 {
     /* margin-bottom: 20px; */
     margin-top: 2px;
     padding: 8px 50px;
     border: #333 solid 1px;
-    border-radius: 8px; background-color: #f0ecec;
+    border-radius: 8px;
+    background-color: #f0ecec;
 }
-#cart p{
+
+#cart p {
     font-size: large;
     font-weight: bold;
 }
-#view-cart-link{
+
+#view-cart-link {
     text-align: center;
     font-size: large;
     padding: 20px;
     border: #333 solid 1px;
-    border-radius: 8px; background-color: #f0ecec;
+    border-radius: 8px;
+    background-color: #f0ecec;
     position: fixed;
     bottom: 20px;
     right: 20px;
     display: none;
+}
+@media (orientation: portrait) {
+    #cart ul li {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 0px;
+        font-size: small;
+        
+    }
+    #cart ul li span {
+            width: 70px;
+        }
+    #cart ul{
+        translate: -30px 0px;
+    }    
 }
