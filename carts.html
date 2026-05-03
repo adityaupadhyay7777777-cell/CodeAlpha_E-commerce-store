@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carts</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <div id="cart">
+        <h2>Your Cart</h2>
+        <ul id="cart-items"></ul>
+        <p>Total: ₹<span id="total">0</span></p>
+        <form id="checkout-section">
+            <div >
+                <label for="address">Address:</label><br>
+                <textarea id="address" placeholder="Enter Your Delivery Address"></textarea>
+            </div><br>
+            <div>
+                <label for="city">City:</label><br>
+                <input type="text" id="city" placeholder="Enter Your City">
+            </div><br>
+            <div>
+                <label for="pincode">Pincode:</label><br>
+                <input type="text" id="pincode" placeholder="Enter Your Pincode">
+            </div><br>
+            <div>
+                <label for="payment">Payment Method:</label><br>
+                <select id="payment">
+                    <option value="credit">Cash On Delivery</option>
+                </select>
+            </div>
+        </form><br>
+        <button onclick="checkout()">Order Now</button>
+
+    </div>
+
+
+</body>
+
+</html>

@@ -14,21 +14,13 @@
         <h1>My Shop</h1>
         <div class="navbar">
             <div>
-                <button id="loginbtn">Login</button>
-                <div class="auth-section" id="login" style="display: none;">
-                    <h2>Login / Register</h2>
-                    <input id="name" type="text" placeholder="Name (for Register)">
-                    <input id="email" type="email" placeholder="Email">
-                    <input id="password" type="password" placeholder="Password">
-                    <button onclick="login()">Login</button>
-                    <button onclick="register()">Register</button>
-                </div>
+                <a href="login.html"> <button id="loginbtn">Login </button></a>
 
             </div>
 
-            <div class="cart-icon" id="cart-icon" onclick="toggleCart()">
-                🛒 <span id="cart-count">0</span>
-            </div>
+            <button id="logoutbtn">
+                &#9099;
+            </button>
         </div>
     </header>
 
@@ -37,13 +29,8 @@
     <section id="products" class="product-list">
         <!-- Products will be dynamically inserted here -->
     </section>
-
-    <!-- Cart Section -->
-    <div id="cart" class="cart hidden">
-        <h2>Your Cart</h2>
-        <ul id="cart-items"></ul>
-        <p>Total: ₹<span id="total">0</span></p>
-        <button onclick="checkout()">Checkout</button>
+    <div id="view-cart-link">🛒Add More Products.&#40;<span style="font-weight: bold;" id="cart-count">0</span><span>&#41;</span>
+        <a href="carts.html">View Cart</a>
     </div>
-
 </body>
+</html>
