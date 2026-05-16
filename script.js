@@ -1,5 +1,6 @@
-const API_URL = "https://backend-1-3kaz.onrender.com"; // Use localhost for local development
-// const API_URL = "https://backend-6zpj.onrender.com"; // Use this when deployed
+const API_URL = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" 
+    ? `http://${window.location.hostname}:5000` 
+    : "https://backend-1-3kaz.onrender.com"; 
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
 
@@ -16,7 +17,7 @@ async function displayProducts() {
                 <div class="product">
                     <img src="${p.image || 'https://via.placeholder.com/300'}" alt="${p.name}">
                     <h3>${p.name}</h3>
-                    <p>₹${p.price}</p>
+                    <p style="height: 20px;">₹${p.price}</p>
                     <p>${p.desc}</p>
                     <button onclick="addToCart('${p._id}')">Add to Cart</button>
                 </div>
@@ -249,12 +250,24 @@ function updateCart() {
     }
     viewcartlink();
 }
+// const viewcartlink = document.getElementById("view-cart-link");
+//     if (cart.length > 0 && viewcartlink) {
+//         viewcartlink.style.display = "block";
+//     }
+//     else{
+//         viewcartlink.style.display = "none";
+//     }
+// 
+//         viewcartlink.style.display = "none";
+//     }
+// }
 removeFromCart = (id) => {
     cart = cart.filter(item => item._id !== id);
     localStorage.setItem('cart', JSON.stringify(cart));
     updateCart();
     viewcartlink();
 }
+
 function viewcartlink() {
 
     const viewcartlink = document.getElementById("view-cart-link");
@@ -263,6 +276,42 @@ function viewcartlink() {
     }
 }
 
-
-
-
+async function forgotPassword() {
+    const emailInput = document.getElementById('forget-email');
+    const passwordInput = document.getElementById('new-password');
+    const messageDiv = document.getElementById('forget-message');
+    
+    if (!emailInput || !passwordInput) return;
+    
+    const emailVal = emailInput.value;
+    const passwordVal = passwordInput.value;
+    if (!emailVal || !passwordVal) {
+        alert("Please enter your email and a new password.");
+        return;
+    }
+    
+    try {
+        const res = await fetch(`${API_URL}/api/auth/forgot-password`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email: emailVal, newPassword: passwordVal })
+        });
+        
+        const data = await res.json();
+        
+        if (res.ok) {
+            messageDiv.style.color = "green";
+            messageDiv.innerText = "Password changed successfully! Redirecting to login...";
+            setTimeout(() => {
+                window.location.href = "login.html";
+            }, 2000);
+        } else {
+            messageDiv.style.color = "red";
+            messageDiv.innerText = data.message || "Failed to reset password.";
+        }
+    } catch (err) {
+        console.error("Forgot password error:", err);
+        messageDiv.style.color = "red";
+        messageDiv.innerText = "Connection error. Please ensure the backend is running.";
+    }
+}
