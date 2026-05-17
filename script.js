@@ -119,8 +119,12 @@ async function checkout() {
 if (document.getElementById("products")) {
     displayProducts();
 }
-updateCart();
-viewcartlink();
+
+// Update cart count and visibility whenever the page is shown (handles normal load and bfcache back button)
+window.addEventListener('pageshow', () => {
+    cart = JSON.parse(localStorage.getItem('cart')) || [];
+    updateCart();
+});
 
 // Check if user is logged in on page load
 window.addEventListener('DOMContentLoaded', () => {
@@ -231,10 +235,13 @@ async function login() {
     }
 }
 function viewcartlink() {
-
     const viewcartlink = document.getElementById("view-cart-link");
-    if (cart.length > 0 && viewcartlink) {
-        viewcartlink.style.display = "block";
+    if (viewcartlink) {
+        if (cart.length > 0) {
+            viewcartlink.style.display = "block";
+        } else {
+            viewcartlink.style.display = "none";
+        }
     }
 }
 
