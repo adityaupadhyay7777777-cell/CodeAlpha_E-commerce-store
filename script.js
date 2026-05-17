@@ -1,5 +1,5 @@
-const API_URL = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" 
-    ? `http://${window.location.hostname}:5000` 
+const API_URL = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" || window.location.protocol === "file:"
+    ? "http://localhost:5000"
     : "https://backend-1-3kaz.onrender.com"; 
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
@@ -27,6 +27,7 @@ async function displayProducts() {
         console.error("Error fetching products:", err);
     }
 }
+//  displayProducts();
 
 function addToCart(id) {
     fetch(`${API_URL}/api/products`)
@@ -229,7 +230,13 @@ async function login() {
         alert("Server error during login");
     }
 }
+function viewcartlink() {
 
+    const viewcartlink = document.getElementById("view-cart-link");
+    if (cart.length > 0 && viewcartlink) {
+        viewcartlink.style.display = "block";
+    }
+}
 
 function updateCart() {
     const cartCount = document.getElementById("cart-count");
@@ -250,30 +257,11 @@ function updateCart() {
     }
     viewcartlink();
 }
-// const viewcartlink = document.getElementById("view-cart-link");
-//     if (cart.length > 0 && viewcartlink) {
-//         viewcartlink.style.display = "block";
-//     }
-//     else{
-//         viewcartlink.style.display = "none";
-//     }
-// 
-//         viewcartlink.style.display = "none";
-//     }
-// }
 removeFromCart = (id) => {
     cart = cart.filter(item => item._id !== id);
     localStorage.setItem('cart', JSON.stringify(cart));
     updateCart();
     viewcartlink();
-}
-
-function viewcartlink() {
-
-    const viewcartlink = document.getElementById("view-cart-link");
-    if (cart.length > 0 && viewcartlink) {
-        viewcartlink.style.display = "block";
-    }
 }
 
 async function forgotPassword() {
